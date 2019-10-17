@@ -13,20 +13,21 @@ def main():
     shingleDf = shingle.get_shingles(shingle_length)
     time_end=time.time()
     print(time_end-time_start)
-
-    shingleDf.to_pickle("./shingle_pickle.py")
-    un_pickle_df=pd.read_pickle("./shingle_pickle.py")
-    print(un_pickle_df)
+    print(shingleDf.head(5))
+    # shingleDf.to_pickle("./shingle_pickle.py")
+    # un_pickle_df=pd.read_pickle("./shingle_pickle.py")
+    # print(un_pickle_df)
     
     
     time_start=time.time()
     signatureDf= signature.get_signature_matrix(shingleDf)
     time_end=time.time()
     print(time_end-time_start)
-
-    signatureDf.to_pickle("./signature_pickle.py")
-    un_pickle_df=pd.read_pickle("./signature_pickle.py")
-    print(un_pickle_df)
+    print(signatureDf.head(5))
+    print(len(signatureDf.index))
+    # signatureDf.to_pickle("./signature_pickle.py")
+    # un_pickle_df=pd.read_pickle("./signature_pickle.py")
+    # print(un_pickle_df)
 
 if (__name__=="__main__"):
     main()
