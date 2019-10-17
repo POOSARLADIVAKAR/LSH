@@ -15,7 +15,7 @@ def preprocess():
         file_data=file.read()
 
         file_data=file_data.lower()
-        file_data=re.sub(r'[,.\n\s ]',"",file_data)
+        file_data=re.sub(r'[,.\n\s \r\t]',"",file_data)
 
         file.seek(0)
         file.write(file_data)

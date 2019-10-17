@@ -1,6 +1,10 @@
 # Testing folder
 temp
 __pycache__
+/home/divakar/Downloads/IR/LSH/hash_fun_shinglematrix.py
+/home/divakar/Downloads/IR/LSH/signature_pickle.py
+/home/divakar/Downloads/IR/LSH/shingle_pickle.py
+
 # Created by https://www.gitignore.io/api/python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=python,visualstudiocode
 
