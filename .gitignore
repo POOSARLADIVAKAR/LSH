@@ -1,5 +1,6 @@
 # Testing folder
-temp
+# temp
+corpus
 __pycache__
 /home/divakar/Downloads/IR/LSH/hash_fun_shinglematrix.py
 /home/divakar/Downloads/IR/LSH/signature_pickle.py
