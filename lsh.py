@@ -29,7 +29,7 @@ def lsh(signatureDf, query, jscore,n_doc):
     for i in range(len(factors_ndoc)):
         bands = factors_ndoc[i][0]
         rows = factors_ndoc[i][1]
-        similar_docs= list()
+        similar_docs= dict()
         # bands=5
         # rows=8
         print(bands,rows)
@@ -42,7 +42,7 @@ def lsh(signatureDf, query, jscore,n_doc):
                 signature_tup = (tuple)(signatureDf.iloc[count : count+rows][signatureDf.columns[k]])
                 print(signature_tup)
                 hash_val = hash(signature_tup)
-                # hash_val = 1896222623651181975
+                hash_val = 1896222623651181975
 
                 if hash_val in bucket_dictonary:
                    bucket_dictonary[hash_val].append(k)
@@ -53,24 +53,29 @@ def lsh(signatureDf, query, jscore,n_doc):
             query_tup = tuple(signatureDf.iloc[count:count+rows][query])
             query_hash_val = hash(query_tup)
             print(query_hash_val)
-            # query_hash_val = 1896222623651181975
+            query_hash_val = 1896222623651181975
             
             for k in range(len(bucket_dictonary[query_hash_val])):  #here k is elements in bucket so document accessed by sigDf[ bucket_dic[query_hash_val][k] ]
                 file = signatureDf.columns[bucket_dictonary[query_hash_val][k]]
                 if (file!= query):
-                    similar_docs.append(k)
+                    if file not in similar_docs:
+                        similar_docs[file]=1
+                    else:
+                        similar_docs[file]+=1
+                    # print()
         print("----------")
         print("----------")
         # return
-        similar_docs = (set)(similar_docs)
+        # similar_docs = (set)(similar_docs)
         print(similar_docs)
-        # return
-
+        # evaluation(similar_docs)
+    # return evaluated_similar_docs
 
 
 if __name__=='__main__':
     un_pickle_df=pd.read_pickle("./signature_pickle.py")
     # print(un_pickle_df)
-    lsh(un_pickle_df, "file2", 1,40)
+    similar_documents = lsh(un_pickle_df, "file2", 1,40)
+    # evaluation
 
 
