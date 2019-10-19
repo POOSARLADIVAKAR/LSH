@@ -25,6 +25,7 @@ def main():
     print(time_end-time_start)
     print(signatureDf.head(5))
     print(len(signatureDf.index))
+
     # signatureDf.to_pickle("./signature_pickle.py")
     # un_pickle_df=pd.read_pickle("./signature_pickle.py")
     # print(un_pickle_df)
