@@ -6,12 +6,37 @@ from os import walk
 from tqdm import tqdm
 
 def get_file_list(dir):
+    """
+        This function gets List of all files in a directory
+
+        Parametrs
+        ---------
+        Dir:
+            Directory path  in workspace containing all Documents
+        
+        Returns
+        -------
+        files: List
+        Returns List of all files in a directory
+    """
     files = os.listdir(dir)
     # files.reverse()
     print(files)
     return files
     
 def preprocess():
+    """
+        This function preprocess all files and overwrites the original files\n
+        This is done by using custom regular expression to elemenate useless charecters from file
+
+        Parametrs
+        ---------
+        NULL
+        
+        Returns
+        -------
+        NULL
+    """
     print(tqdm)
     file_list = get_file_list('./temp')
     # print(file_list)

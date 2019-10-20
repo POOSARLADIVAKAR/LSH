@@ -4,6 +4,23 @@ import pandas as pd
 from tqdm import tqdm
 
 def bands_rows(jscore,n_doc):
+    """
+        This function finds best Bands and Rows value for My S shaped Prbabilty function  (1- (1-s^r)^b)\n
+        This is found by finding B and R that are integers and satisying (1/b)^(1/r)
+
+        Parametrs
+        ---------
+        jscore : float
+            User threshold for jaccard similarity score between two documents 
+
+        n_doc : int
+            Number of documents in the Corpus and (n_doc = b*r)
+        
+        Returns
+        -------
+        (b,r) : tuple
+        Returns Best tuple of (bands,rows) that is closest to (1/b)^1/r
+    """
     # blog b = -n*log jscore
     err=np.inf
     b_actual=1
@@ -16,6 +33,20 @@ def bands_rows(jscore,n_doc):
     return (b_actual,n_doc//b_actual)  # givin output always 1
 
 def bands_rows(n_doc):
+    """
+        This fuuctio finds all factors of _doc
+
+        Parametrs
+        ---------
+
+        n_doc : int
+            Number of documents in the Corpus and (n_doc = b*r)
+        
+        Returns
+        -------
+        factors : List[] 
+        List of tuples of all the factors of n_doc input representing (bands,rows) tuple
+    """
     factors=[]
     for i in range(1,(int)((n_doc)+1)):
         if n_doc%i==0:
@@ -23,6 +54,27 @@ def bands_rows(n_doc):
     return factors
 
 def lsh(signatureDf, query,n_doc):
+    """
+        This function finds all the similar documents for your query document for all the values combinations of  Bands and Rows 
+
+        Parametrs
+        ---------
+        signatureDf: pandas. Dataframe
+            DataFrame of Signatures Obtained after applying minhashing on Shingle Matrix
+        Query : string
+            String Representing fileame to which User is trying to find similar Documents
+
+        n_doc : int
+            Number of documents in the Corpus and (n_doc = b*r)
+        
+        Returns
+        -------
+        similar_docs : Dictionary
+        Returns Dictionary of documets that are similar to Query document
+        Key = filename 
+        value = number of bands in which both query and file got hashed to same bucket
+    """
+
     factors_ndoc = bands_rows(n_doc)
     evaluated_similar_docs = dict()
     
@@ -67,6 +119,19 @@ def lsh(signatureDf, query,n_doc):
     return similar_docs
 
 def find_score(doc1,doc2):
+    """
+        This function finds the jaccard similarity score between two documents
+
+        Parametrs
+        ---------
+        Doc1,Doc2: string
+            strings represeting documents names
+        
+        Returns
+        -------
+        jaccard_score : float
+        Returns jaccard score by finding union and intersection of all the shingles between two documents
+    """
     intersection = 0
     union = 0
     rows_df,columns_df = shingleDF.shape 
@@ -78,6 +143,24 @@ def find_score(doc1,doc2):
     return intersection/union
 
 def precision(similar_docs,query,jscore):
+    """
+        This functions finds number of relevant documents in all the returned documents from lsh function
+
+        Parametrs
+        ---------
+        similar_docs: Python Dictionary()
+            Dictionary of similar documents to Query Document
+        query: string
+            string representig query document's file name
+        jscore : float
+            User threshold for jaccard similarity score between two documents 
+
+        
+        Returns
+        -------
+        Precision_count : int
+        Returns number of documents from input similar_docs dictionary that have higher jaccard score than User threshold
+    """
     # shingleDF = pd.read_pickle("./shingle_pickle.py")
     jscore_dict = dict()
     keys_list = similar_docs.keys()
@@ -89,6 +172,23 @@ def precision(similar_docs,query,jscore):
     return count
         
 def recall(columns,query,jscore):
+    """
+        This functions finds number of relevant documents to query document in whole corpus
+        
+        Parametrs
+        ---------
+        columns: List[]
+            List of all the file names in corpus
+        query: string
+            string representig query document's file name
+        jscore : float
+            User threshold for jaccard similarity score between two documents 
+
+        Returns
+        -------
+        recall_count : int
+        Returns number of documents from whole corpus whose jaccard score is greater than user jscore input
+    """
     recall_count=0
     for i in columns:
         if i!=query:

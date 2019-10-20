@@ -7,6 +7,21 @@ import shingle
 from tqdm import tqdm
 
 def get_hash_functions(num):
+    """
+        This function generates randomly input number of hash functions of format (A*X+B)
+
+        Parameters
+        ----------
+        num: int
+            numer of hash functions required in signature matrix
+
+        
+        Returns
+        -------
+        hash_tup_list : list of tuples of (A,B)
+            retunns all randomly generated hash_tuples list
+            
+    """
     hash_tup=[]
     print("This is get_hash_functions")
     for i in tqdm(range(num)):
@@ -15,6 +30,21 @@ def get_hash_functions(num):
     return hash_tup
 
 def get_hash_matrix(shingleDf,hash_list):
+    """
+        This function new Dataframe with rows as hash functions and columns as filenames
+        
+        Parameters
+        ----------
+        shingleDf : Dataframe 
+            Dataframe of Shingles to get columns list
+        hash_lsit : List
+            List of all hsh_functions to use them as indices
+        
+        Returns
+        -------
+        new_df : Dataframe
+            New_df with all entries as values of indices computed from hash_funcitons
+    """
     print("this is get_hash_matrix function")
     new_df = shingleDf.copy()
     row = len(new_df.index)
@@ -26,7 +56,20 @@ def get_hash_matrix(shingleDf,hash_list):
     return new_df
 
 def get_signature_matrix(shingleDf):
-    
+    """
+        This function creates new Signature matrix that is equivalent to shingle matrix
+        
+        Parameters
+        ----------
+        shingleDf : Dataframe 
+            Dataframe of Shingles to get columns list
+        
+        
+        Returns
+        -------
+        signatureDF : Dataframe
+            signature dataframe that is generated from 100 hash functions
+    """
     # hash_list = get_hash_functions(100)
     # hash_functions_df = pd.DataFrame(hash_list)
     # hash_functions_df.to_pickle("./hash_functions.py")

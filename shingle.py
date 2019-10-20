@@ -4,6 +4,19 @@ import preprocess as pp
 from tqdm import tqdm
 
 def get_shingles(shingle_length):
+    """
+        This funciton generates a shingle DataFrame by fiding all shingles in all the files and their incidences
+
+        Parametrs
+        ---------
+        Shingle_length: int
+            length of  shingle Etries in Dataframe (Indices of Data frame)
+        
+        Returns
+        -------
+        shingle_Df: Pandas.Dataframe
+        Returns Shingle Dataframe by finding all shingle by traversing all files in directory tmep
+    """
     files = pp.get_file_list('./temp')
    
     column_list=["SHINGLE"]
