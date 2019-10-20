@@ -34,7 +34,6 @@ def get_signature_matrix(shingleDf):
     hash_list = []
     for i in hash_functions_df.index:
         hash_list.append((hash_functions_df.iloc[i][0],hash_functions_df.iloc[i][1]))
-    # print(hash_list)
 
     signature_cols=["HASH_INDEX"]
     for i in shingleDf.columns:
@@ -49,18 +48,16 @@ def get_signature_matrix(shingleDf):
     # hash_matrix.to_pickle("./hash_matrix.pkl")
     hash_matrix = pd.read_pickle("./hash_matrix.pkl")
     hash_matrix=hash_matrix.drop(shingleDf.columns,axis=1)
-    # print(hash_matrix.head(5))
 
     row=len(shingleDf.index)
     hashes=len(hash_list)
     files=len(shingleDf.columns)
 
-    for i in tqdm(range(hashes)): #hash_list[i]
+    for i in tqdm(range(hashes)): 
         for j in tqdm(range(row)):
             for k in tqdm(range(files)):
                 if(shingleDf.iloc[j][k]==1):
                     signatureDf.iloc[i][k]=min(signatureDf.iloc[i][k],hash_matrix.iloc[j][i])
-    # print(signatureDf.head(5))
     return signatureDf
 
 

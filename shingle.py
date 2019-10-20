@@ -5,9 +5,7 @@ from tqdm import tqdm
 
 def get_shingles(shingle_length):
     files = pp.get_file_list('./temp')
-    # files = [files[0],files[1]]
-    # print(type(files))
-    # return
+   
     column_list=["SHINGLE"]
     for i in range(len(files)):
         column_list.append(files[i])

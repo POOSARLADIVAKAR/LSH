@@ -36,7 +36,7 @@ def generate_hash_functions(rows, no_of_hash_functions):
     """
 
     hashes = []
-    c = 10000
+    c = rows
     
     # all functions are same here. check this
     for i in range(no_of_hash_functions):
@@ -48,8 +48,8 @@ def generate_hash_functions(rows, no_of_hash_functions):
                 c: prime integer just greater than rows
                 a,b: random integer less than c
             """
-            return ((floor(random.uniform(1,sys.maxsize)))*x+(floor(random.uniform(1,sys.maxsize))))%c
-            # return (randint(3,c-1)*x + randint(3,c-1))%c
+            # return ((floor(random.uniform(1,sys.maxsize)))*x+(floor(random.uniform(1,sys.maxsize))))%c
+            return (randint(1,2*c)*x + randint(1,2*c))%c
         hashes.append(hash)
 
     return hashes
@@ -84,12 +84,9 @@ def generate_signature_matrix(incidence_matrix, no_of_hash_functions):
     rows, cols = incidence_matrix.shape
     hashes = generate_hash_functions(rows, no_of_hash_functions)
     signature_matrix = DataFrame(index=[i for i in range(no_of_hash_functions)], columns=incidence_matrix.columns)
-    # print(signature_matrix)
-    # return
+    
     # core minhashing algorithm
     for i in tqdm(range(rows)):
-        if(i%50)==0 :
-            print(signature_matrix.head(5))
         for j in incidence_matrix.columns:
             if incidence_matrix.iloc[i][j]==1:
                 
@@ -103,8 +100,8 @@ def generate_signature_matrix(incidence_matrix, no_of_hash_functions):
                         # print(hashes[k](i))
     
     print("saving generated signature_matrix to pickle file...")
-    signature_matrix.to_pickle("./sig_matc50.pickle")
-    print("saved to sig_mat.pickle")
+    signature_matrix.to_pickle("./sig_matc_4shigles.pickle")
+    # print("saved to sig_mat.pickle")
     return signature_matrix
 
 if __name__=="__main__":
