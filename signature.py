@@ -25,9 +25,9 @@ def get_hash_functions(num):
     hash_tup=[]
     print("This is get_hash_functions")
     for i in tqdm(range(num)):
-        tup=(floor(random.uniform(1,num)),floor(random.uniform(1,num)))
+        tup=(floor(random.uniform(1,num)),floor(random.uniform(1,num)))  #return float number between 1 and 100
         hash_tup.append(tup)
-    return hash_tup
+    return hash_tup #list of tuples representing co-efficinets of AX+B funciton
 
 def get_hash_matrix(shingleDf,hash_list):
     """
@@ -51,7 +51,7 @@ def get_hash_matrix(shingleDf,hash_list):
     for i in tqdm(range(len(hash_list))):
         new_col=[]
         for j in tqdm(range(row)):
-            new_col.append((hash_list[i][0]*j+hash_list[i][1])%row)
+            new_col.append((hash_list[i][0]*j+hash_list[i][1])%row) #filling data frame with hash(index) values
         new_df["HASH"+str(i)]=new_col
     return new_df
 
@@ -73,7 +73,7 @@ def get_signature_matrix(shingleDf):
     # hash_list = get_hash_functions(100)
     # hash_functions_df = pd.DataFrame(hash_list)
     # hash_functions_df.to_pickle("./hash_functions.py")
-    hash_functions_df=pd.read_pickle("./hash_functions.py")
+    hash_functions_df=pd.read_pickle("./hash_functions.py")  # serialized listof hash_function
     hash_list = []
     for i in hash_functions_df.index:
         hash_list.append((hash_functions_df.iloc[i][0],hash_functions_df.iloc[i][1]))
@@ -81,7 +81,7 @@ def get_signature_matrix(shingleDf):
     signature_cols=["HASH_INDEX"]
     for i in shingleDf.columns:
         signature_cols.append(i)    
-    signatureDf = pd.DataFrame(columns = signature_cols )
+    signatureDf = pd.DataFrame(columns = signature_cols ) #creating columns structure for data frame
     signatureDf.set_index("HASH_INDEX",inplace=True)
 
     for i in range(len(hash_list)):
@@ -89,14 +89,14 @@ def get_signature_matrix(shingleDf):
 
     # hash_matrix = get_hash_matrix( shingleDf , hash_list)
     # hash_matrix.to_pickle("./hash_matrix.pkl")
-    hash_matrix = pd.read_pickle("./hash_matrix.pkl")
-    hash_matrix=hash_matrix.drop(shingleDf.columns,axis=1)
+    hash_matrix = pd.read_pickle("./hash_matrix.pkl") #serialized hash matrix
+    hash_matrix=hash_matrix.drop(shingleDf.columns,axis=1) #dropping document named columns
 
     row=len(shingleDf.index)
     hashes=len(hash_list)
     files=len(shingleDf.columns)
 
-    for i in tqdm(range(hashes)): 
+    for i in tqdm(range(hashes)):  #O(rows*docs*hashes)
         for j in tqdm(range(row)):
             for k in tqdm(range(files)):
                 if(shingleDf.iloc[j][k]==1):

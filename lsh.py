@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
+shingleDF = pd.read_pickle("./shingle_pickle4.py") 
+
 def bands_rows(jscore,n_doc):
     """
         This function finds best Bands and Rows value for My S shaped Prbabilty function  (1- (1-s^r)^b)\n
@@ -26,9 +28,9 @@ def bands_rows(jscore,n_doc):
     b_actual=1
     print(err,b_actual,jscore,n_doc)
     print(n_doc*math.log(jscore,10))
-    for i in range(1,n_doc+1):
+    for i in range(1,n_doc+1): #objective function = i*(math.log(i,10))+n_doc*(math.log(jscore,10)))
         if (i*(math.log(i,10))+n_doc*(math.log(jscore,10)))<err :
-            err=i*(math.log(i,10))+n_doc*(math.log(jscore,10))
+            err=i*(math.log(i,10))+n_doc*(math.log(jscore,10))  #finding B,R that cause least error to objective function
             b_actual=i
     return (b_actual,n_doc//b_actual)  # givin output always 1
 
@@ -47,7 +49,7 @@ def bands_rows(n_doc):
         factors : List[] 
         List of tuples of all the factors of n_doc input representing (bands,rows) tuple
     """
-    factors=[]
+    factors=[] #finding all factors of n_doc and constructing List of tuples
     for i in range(1,(int)((n_doc)+1)):
         if n_doc%i==0:
             factors.append((i,n_doc//i))
@@ -90,20 +92,20 @@ def lsh(signatureDf, query,n_doc):
         
             for k in range(len(signatureDf.columns)): #push doc id's so doc name found by signatureDf.columns[k]
                 
-                signature_tup = (tuple)(signatureDf.iloc[count : count+rows][signatureDf.columns[k]])
-                hash_val = hash(signature_tup)
+                signature_tup = (tuple)(signatureDf.iloc[count : count+rows][signatureDf.columns[k]]) # converting all rows of a documet in a band into tuple
+                hash_val = hash(signature_tup) #built-in hash function applied on tuples
                 if hash_val in bucket_dictonary:
                    bucket_dictonary[hash_val].append(k)
                 else:
                    bucket_dictonary[hash_val]= [k]
                 
-            query_tup = tuple(signatureDf.iloc[count:count+rows][query])
+            query_tup = tuple(signatureDf.iloc[count:count+rows][query])  # query documents tiple in jth band
             query_hash_val = hash(query_tup)
             
             for k in range(len(bucket_dictonary[query_hash_val])):  #here k is elements in bucket so document accessed by sigDf[ bucket_dic[query_hash_val][k] ]
                 file = signatureDf.columns[bucket_dictonary[query_hash_val][k]]
                 if (file!= query):
-                    if file not in similar_docs:
+                    if file not in similar_docs: #dictionary for each band
                         similar_docs[file]=1
                     else:
                         similar_docs[file]+=1
@@ -134,13 +136,13 @@ def find_score(doc1,doc2):
     """
     intersection = 0
     union = 0
-    rows_df,columns_df = shingleDF.shape 
+    rows_df,columns_df = shingleDF.shape #finging shingle sthat sommon in both and unique in both
     for i in tqdm(range(rows_df)):
         if shingleDF.iloc[i][doc1] ==1 |  shingleDF.iloc[i][doc2] ==1 :
             union+=1
         if shingleDF.iloc[i][doc1] ==1 &  shingleDF.iloc[i][doc2] ==1 :
             intersection+=1
-    return intersection/union
+    return intersection/union #returns jaccard score
 
 def precision(similar_docs,query,jscore):
     """
@@ -166,7 +168,7 @@ def precision(similar_docs,query,jscore):
     keys_list = similar_docs.keys()
     count = 0
     for i in keys_list:
-        sim_score = find_score(query , i)
+        sim_score = find_score(query , i) #find number of documents in similar_docs dictionary greater than user threshold value
         if sim_score>= jscore:
             count+=1    
     return count
@@ -192,7 +194,7 @@ def recall(columns,query,jscore):
     recall_count=0
     for i in columns:
         if i!=query:
-            sim_score = find_score(i,query)
+            sim_score = find_score(i,query) #find number of documents in corpus greater than user threshold value
             if sim_score > jscore:
                 recall_count+=1
     return recall_count
