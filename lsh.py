@@ -111,13 +111,8 @@ def lsh(signatureDf, query,n_doc):
                         similar_docs[file]+=1
         # print("----------")
         # print("----------")
-        print(similar_docs)
-        # evaluated_similar_docs = similar_docs
-        print(len(similar_docs))
-    #     if (len(similar_docs)>=1) & (rows!=1) :
-    #         precision(similar_docs,query,0.5)
-    #         evaluated_similar_docs = similar_docs
-    # return evaluated_similar_docs
+        # print(similar_docs)
+        # print(len(similar_docs))
     return similar_docs
 
 def find_score(doc1,doc2):
@@ -194,21 +189,25 @@ def recall(columns,query,jscore):
     recall_count=0
     for i in columns:
         if i!=query:
-            sim_score = find_score(i,query) #find number of documents in corpus greater than user threshold value
+            sim_score = find_score_recall(i,query) #find number of documents in corpus greater than user threshold value
             if sim_score > jscore:
                 recall_count+=1
     return recall_count
 
-
+def find_score_recall(doc1,doc2):
+    intersection = 0
+    union = 0
+    rows_df,columns_df = shingleDF.shape #finging shingle sthat sommon in both and unique in both
+    doc1 = shingleDF.iloc[:][doc1]
+    doc2 = shingleDF.iloc[:][doc2]
+    intersection = np.sum(np.array(doc1) & np.array(doc2))
+    union = np.sum(np.array(doc1) | np.array(doc2))
+    return intersection/union #returns jaccard score
 
 
 if __name__=='__main__':
     sig_matrix=pd.read_pickle("./sig_matc_4shigles.pickle")
-    # print(sig_matrix.head(5))
     shingleDF = pd.read_pickle("./shingle_pickle4.py")
-    # print(shingleDF.head(5))
-    # print(find_score("g4pD_taskd.txt", "g3pB_taska.txt" ))
-    # for i in sig_matrix.columns:
     output0 = "Please Enter document number : "
     print(output0)
     query = (int)(input()) 
@@ -218,9 +217,12 @@ if __name__=='__main__':
     for i in range(query,query+1):
         similar_documents = lsh(sig_matrix,sig_matrix.columns[i],100)
         print(similar_documents)
-        p_count = precision(similar_documents,sig_matrix.columns[i],jscore = 0.1)
-        print("precision is = "+ (str)(p_count/len(similar_documents)))
-        r_count = recall(shingleDF.columns ,sig_matrix.columns[i],jscore = 0.1 )
-        print("recall is = "+ (str)(p_count/r_count))
+        if(len(similar_documents)==0):
+            print("No similar Documents found")
+        else:    
+            p_count = precision(similar_documents,sig_matrix.columns[i],jscore=0.15)
+            print("precision is = "+ (str)(p_count/len(similar_documents)))
+            r_count = recall(shingleDF.columns ,sig_matrix.columns[i],jscore =0.1)
+            print("recall is = "+ (str)(p_count/r_count))
     # evaluation
     # print(bands_rows(100))

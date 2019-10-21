@@ -56,7 +56,6 @@ def main():
         # signatureDf.to_pickle("./signature_pickle4shingles.py")
         # un_pickle_df=pd.read_pickle("./signature_pickle.py")
 
-
     output0 = "Please Enter document number : " # taking user input query and threshold jaccard score
     print(output0)
     query = (int)(input()) 
@@ -67,10 +66,13 @@ def main():
     for i in range(query,query+1):
         similar_documents = lsh.lsh(sig_matrix,sig_matrix.columns[i],100) # applying Lsh on signature matrix
         print(similar_documents)
-        p_count = lsh.precision(similar_documents,sig_matrix.columns[i],jscore = 0.1) #calculating precision for retreivs documents
-        print("precision is = "+ (str)(p_count/len(similar_documents)))
-        r_count = lsh.recall(sig_matrix.columns[0:3] ,sig_matrix.columns[i],jscore = 0.1 ) #calculating recall for retreived documents
-        print("recall is = "+ (str)(p_count/r_count))
+        if(len(similar_documents)==0):
+            print("No similar Documents found")
+        else:    
+            p_count = lsh.precision(similar_documents,sig_matrix.columns[i],jscore = 0.1) #calculating precision for retreivs documents
+            print("precision is = "+ (str)(p_count/len(similar_documents)))
+            r_count = lsh.recall(sig_matrix.columns,sig_matrix.columns[i],jscore = 0.1 ) #calculating recall for retreived documents
+            print("recall is = "+ (str)(p_count/r_count))
 
 
 
