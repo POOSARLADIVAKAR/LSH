@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module lsh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>lsh</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/divakar/Downloads/IR/LSH/lsh.py">/home/divakar/Downloads/IR/LSH/lsh.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-bands_rows"><strong>bands_rows</strong></a>(n_doc)</dt><dd><tt>This&nbsp;fuuctio&nbsp;finds&nbsp;all&nbsp;factors&nbsp;of&nbsp;_doc<br>
+&nbsp;<br>
+Parametrs<br>
+---------<br>
+&nbsp;<br>
+n_doc&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;documents&nbsp;in&nbsp;the&nbsp;Corpus&nbsp;and&nbsp;(n_doc&nbsp;=&nbsp;b*r)<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+factors&nbsp;:&nbsp;List[]&nbsp;<br>
+List&nbsp;of&nbsp;tuples&nbsp;of&nbsp;all&nbsp;the&nbsp;factors&nbsp;of&nbsp;n_doc&nbsp;input&nbsp;representing&nbsp;(bands,rows)&nbsp;tuple</tt></dd></dl>
+ <dl><dt><a name="-find_score"><strong>find_score</strong></a>(doc1, doc2)</dt><dd><tt>This&nbsp;function&nbsp;finds&nbsp;the&nbsp;jaccard&nbsp;similarity&nbsp;score&nbsp;between&nbsp;two&nbsp;documents<br>
+&nbsp;<br>
+Parametrs<br>
+---------<br>
+Doc1,Doc2:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;strings&nbsp;represeting&nbsp;documents&nbsp;names<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+jaccard_score&nbsp;:&nbsp;float<br>
+Returns&nbsp;jaccard&nbsp;score&nbsp;by&nbsp;finding&nbsp;union&nbsp;and&nbsp;intersection&nbsp;of&nbsp;all&nbsp;the&nbsp;shingles&nbsp;between&nbsp;two&nbsp;documents</tt></dd></dl>
+ <dl><dt><a name="-find_score_recall"><strong>find_score_recall</strong></a>(doc1, doc2)</dt></dl>
+ <dl><dt><a name="-lsh"><strong>lsh</strong></a>(signatureDf, query, n_doc)</dt><dd><tt>This&nbsp;function&nbsp;finds&nbsp;all&nbsp;the&nbsp;similar&nbsp;documents&nbsp;for&nbsp;your&nbsp;query&nbsp;document&nbsp;for&nbsp;all&nbsp;the&nbsp;values&nbsp;combinations&nbsp;of&nbsp;&nbsp;Bands&nbsp;and&nbsp;Rows&nbsp;<br>
+&nbsp;<br>
+Parametrs<br>
+---------<br>
+signatureDf:&nbsp;pandas.&nbsp;Dataframe<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DataFrame&nbsp;of&nbsp;Signatures&nbsp;Obtained&nbsp;after&nbsp;applying&nbsp;minhashing&nbsp;on&nbsp;Shingle&nbsp;Matrix<br>
+Query&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;Representing&nbsp;fileame&nbsp;to&nbsp;which&nbsp;User&nbsp;is&nbsp;trying&nbsp;to&nbsp;find&nbsp;similar&nbsp;Documents<br>
+&nbsp;<br>
+n_doc&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;documents&nbsp;in&nbsp;the&nbsp;Corpus&nbsp;and&nbsp;(n_doc&nbsp;=&nbsp;b*r)<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+similar_docs&nbsp;:&nbsp;Dictionary<br>
+Returns&nbsp;Dictionary&nbsp;of&nbsp;documets&nbsp;that&nbsp;are&nbsp;similar&nbsp;to&nbsp;Query&nbsp;document<br>
+Key&nbsp;=&nbsp;filename&nbsp;<br>
+value&nbsp;=&nbsp;number&nbsp;of&nbsp;bands&nbsp;in&nbsp;which&nbsp;both&nbsp;query&nbsp;and&nbsp;file&nbsp;got&nbsp;hashed&nbsp;to&nbsp;same&nbsp;bucket</tt></dd></dl>
+ <dl><dt><a name="-precision"><strong>precision</strong></a>(similar_docs, query, jscore)</dt><dd><tt>This&nbsp;functions&nbsp;finds&nbsp;number&nbsp;of&nbsp;relevant&nbsp;documents&nbsp;in&nbsp;all&nbsp;the&nbsp;returned&nbsp;documents&nbsp;from&nbsp;lsh&nbsp;function<br>
+&nbsp;<br>
+Parametrs<br>
+---------<br>
+similar_docs:&nbsp;Python&nbsp;Dictionary()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dictionary&nbsp;of&nbsp;similar&nbsp;documents&nbsp;to&nbsp;Query&nbsp;Document<br>
+query:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;representig&nbsp;query&nbsp;document's&nbsp;file&nbsp;name<br>
+jscore&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;threshold&nbsp;for&nbsp;jaccard&nbsp;similarity&nbsp;score&nbsp;between&nbsp;two&nbsp;documents&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+Precision_count&nbsp;:&nbsp;int<br>
+Returns&nbsp;number&nbsp;of&nbsp;documents&nbsp;from&nbsp;input&nbsp;similar_docs&nbsp;dictionary&nbsp;that&nbsp;have&nbsp;higher&nbsp;jaccard&nbsp;score&nbsp;than&nbsp;User&nbsp;threshold</tt></dd></dl>
+ <dl><dt><a name="-recall"><strong>recall</strong></a>(columns, query, jscore)</dt><dd><tt>This&nbsp;functions&nbsp;finds&nbsp;number&nbsp;of&nbsp;relevant&nbsp;documents&nbsp;to&nbsp;query&nbsp;document&nbsp;in&nbsp;whole&nbsp;corpus<br>
+&nbsp;<br>
+Parametrs<br>
+---------<br>
+columns:&nbsp;List[]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;all&nbsp;the&nbsp;file&nbsp;names&nbsp;in&nbsp;corpus<br>
+query:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;representig&nbsp;query&nbsp;document's&nbsp;file&nbsp;name<br>
+jscore&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;threshold&nbsp;for&nbsp;jaccard&nbsp;similarity&nbsp;score&nbsp;between&nbsp;two&nbsp;documents&nbsp;<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+recall_count&nbsp;:&nbsp;int<br>
+Returns&nbsp;number&nbsp;of&nbsp;documents&nbsp;from&nbsp;whole&nbsp;corpus&nbsp;whose&nbsp;jaccard&nbsp;score&nbsp;is&nbsp;greater&nbsp;than&nbsp;user&nbsp;jscore&nbsp;input</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>shingleDF</strong> =         g4pD_taskd.txt g3pC_taskd.txt g1pD_taske...     0              1
+
+[14414 rows x 100 columns]</td></tr></table>
+</body></html>

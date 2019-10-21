@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module signature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>signature</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/divakar/Downloads/IR/LSH/signature.py">/home/divakar/Downloads/IR/LSH/signature.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="shingle.html">shingle</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-floor"><strong>floor</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integer&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-get_hash_functions"><strong>get_hash_functions</strong></a>(num)</dt><dd><tt>This&nbsp;function&nbsp;generates&nbsp;randomly&nbsp;input&nbsp;number&nbsp;of&nbsp;hash&nbsp;functions&nbsp;of&nbsp;format&nbsp;(A*X+B)<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+num:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numer&nbsp;of&nbsp;hash&nbsp;functions&nbsp;required&nbsp;in&nbsp;signature&nbsp;matrix<br>
+&nbsp;<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+hash_tup_list&nbsp;:&nbsp;list&nbsp;of&nbsp;tuples&nbsp;of&nbsp;(A,B)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;retunns&nbsp;all&nbsp;randomly&nbsp;generated&nbsp;hash_tuples&nbsp;list</tt></dd></dl>
+ <dl><dt><a name="-get_hash_matrix"><strong>get_hash_matrix</strong></a>(shingleDf, hash_list)</dt><dd><tt>This&nbsp;function&nbsp;new&nbsp;Dataframe&nbsp;with&nbsp;rows&nbsp;as&nbsp;hash&nbsp;functions&nbsp;and&nbsp;columns&nbsp;as&nbsp;filenames<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+shingleDf&nbsp;:&nbsp;Dataframe&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dataframe&nbsp;of&nbsp;Shingles&nbsp;to&nbsp;get&nbsp;columns&nbsp;list<br>
+hash_lsit&nbsp;:&nbsp;List<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;all&nbsp;hsh_functions&nbsp;to&nbsp;use&nbsp;them&nbsp;as&nbsp;indices<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+new_df&nbsp;:&nbsp;Dataframe<br>
+&nbsp;&nbsp;&nbsp;&nbsp;New_df&nbsp;with&nbsp;all&nbsp;entries&nbsp;as&nbsp;values&nbsp;of&nbsp;indices&nbsp;computed&nbsp;from&nbsp;hash_funcitons</tt></dd></dl>
+ <dl><dt><a name="-get_signature_matrix"><strong>get_signature_matrix</strong></a>(shingleDf)</dt><dd><tt>This&nbsp;function&nbsp;creates&nbsp;new&nbsp;Signature&nbsp;matrix&nbsp;that&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;shingle&nbsp;matrix<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+shingleDf&nbsp;:&nbsp;Dataframe&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dataframe&nbsp;of&nbsp;Shingles&nbsp;to&nbsp;get&nbsp;columns&nbsp;list<br>
+&nbsp;<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+signatureDF&nbsp;:&nbsp;Dataframe<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signature&nbsp;dataframe&nbsp;that&nbsp;is&nbsp;generated&nbsp;from&nbsp;100&nbsp;hash&nbsp;functions</tt></dd></dl>
+</td></tr></table>
+</body></html>

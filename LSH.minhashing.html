@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module minhashing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>minhashing</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/divakar/Downloads/IR/LSH/minhashing.py">/home/divakar/Downloads/IR/LSH/minhashing.py</a></font></td></tr></table>
+    <p><tt>Reduce&nbsp;the&nbsp;size&nbsp;of&nbsp;shingle&nbsp;incidence&nbsp;matrix&nbsp;by&nbsp;converting&nbsp;docs&nbsp;to&nbsp;signatures<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;calculates&nbsp;the&nbsp;signature&nbsp;of&nbsp;each&nbsp;document&nbsp;using&nbsp;minhashing&nbsp;<br>
+technique&nbsp;by&nbsp;utilizing&nbsp;a&nbsp;number&nbsp;of&nbsp;hash&nbsp;functions<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contatins&nbsp;following&nbsp;functions:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;generate_signature_matrix&nbsp;-&nbsp;to&nbsp;generate&nbsp;signature&nbsp;matrix&nbsp;from&nbsp;incidence&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matrix</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-floor"><strong>floor</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integer&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-generate_hash_functions"><strong>generate_hash_functions</strong></a>(rows, no_of_hash_functions)</dt><dd><tt>This&nbsp;function&nbsp;generates&nbsp;parameters&nbsp;for&nbsp;given&nbsp;no&nbsp;of&nbsp;hash&nbsp;functions<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+rows:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;of&nbsp;shingles&nbsp;in&nbsp;corpus,&nbsp;a.k.a&nbsp;no&nbsp;of&nbsp;rows&nbsp;in&nbsp;shingle&nbsp;matrix<br>
+no_of_hash_functions:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;of&nbsp;hash&nbsp;functions&nbsp;to&nbsp;generate&nbsp;for&nbsp;minhashing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default:&nbsp;100<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;functions&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;hashes[i](x)</tt></dd></dl>
+ <dl><dt><a name="-generate_signature_matrix"><strong>generate_signature_matrix</strong></a>(incidence_matrix, no_of_hash_functions)</dt><dd><tt>This&nbsp;function&nbsp;generates&nbsp;the&nbsp;signature&nbsp;matrix&nbsp;for&nbsp;whole&nbsp;corpus<br>
+&nbsp;<br>
+if&nbsp;a&nbsp;already&nbsp;generated&nbsp;pickle&nbsp;file&nbsp;named&nbsp;sig_mat.pickle&nbsp;exists,<br>
+this&nbsp;function&nbsp;will&nbsp;load&nbsp;it&nbsp;instead<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+incidence_matrix:&nbsp;pandas.DataFrame<br>
+&nbsp;&nbsp;&nbsp;&nbsp;incidence&nbsp;index&nbsp;generated&nbsp;after&nbsp;shingling&nbsp;of&nbsp;similar&nbsp;process<br>
+no_of_hash_functions:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;of&nbsp;hash&nbsp;functions&nbsp;to&nbsp;use&nbsp;to&nbsp;generate&nbsp;document&nbsp;signatures.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default:&nbsp;100<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+pandas.DataFrame<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dataframe&nbsp;containing&nbsp;signatures&nbsp;of&nbsp;each&nbsp;document</tt></dd></dl>
+</td></tr></table>
+</body></html>
