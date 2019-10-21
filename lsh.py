@@ -164,6 +164,7 @@ def precision(similar_docs,query,jscore):
     count = 0
     for i in keys_list:
         sim_score = find_score(query , i) #find number of documents in similar_docs dictionary greater than user threshold value
+        print(sim_score)
         if sim_score>= jscore:
             count+=1    
     return count
@@ -220,7 +221,7 @@ if __name__=='__main__':
         if(len(similar_documents)==0):
             print("No similar Documents found")
         else:    
-            p_count = precision(similar_documents,sig_matrix.columns[i],jscore=0.15)
+            p_count = precision(similar_documents,sig_matrix.columns[i],jscore =0.1 )
             print("precision is = "+ (str)(p_count/len(similar_documents)))
             r_count = recall(shingleDF.columns ,sig_matrix.columns[i],jscore =0.1)
             print("recall is = "+ (str)(p_count/r_count))

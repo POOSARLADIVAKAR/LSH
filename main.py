@@ -46,7 +46,7 @@ def main():
         # shingleDf.to_pickle("./shingle_pickle.py")
         # un_pickle_df=pd.read_pickle("./shingle_pickle.py")
     
-    if os.path.exists("./shingle_pickle4.py") == False :
+    if os.path.exists("./sig_nat.pickle") == False :
 
         time_start=time.time()
         signatureDf= minhashing.generate_signature_matrix(shingleDf,100) # Time calculation for min hashing
